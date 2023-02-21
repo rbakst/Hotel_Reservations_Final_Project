@@ -1,5 +1,6 @@
-from ..entities.guest import Guest
+from entities.guest import Guest
 from entities.reservation import Reservation
+import inspect
 
 #this file is intended to be provided to them in order to create the database
 def generate_script(first_reservation):
@@ -8,12 +9,13 @@ def generate_script(first_reservation):
     sql = """create database HotelBookings
             go
             create table Guest
-            (GuestId int identity primary key,
-            Count_Adults int,
-            Count_Children int, 
-            Count_Babies int,
-            Origin_Country varchar(50)
-            )
+            GuestId int identity primary key,"""
+    for attribute in vars(guest):
+        sql += attribute + " " + type(vars(guest)[attribute]) + ","
+
+    sql.trim_end(",")
+    sql += ")"
+    """
 
             create table Reservation
             (
