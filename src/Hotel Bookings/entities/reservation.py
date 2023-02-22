@@ -10,7 +10,7 @@ from datetime import datetime
 class Reservation:
     def __init__(self, reservation_row):
         #figure out the right way to iterrows. temp fix - set to [1]
-        reservation_row = reservation_row[1]
+        #reservation_row = reservation_row[1]
         #technically can use regex for this
         self.hotel_type = Hotel_Type[reservation_row["hotel"].replace(" ", "_").upper()] #replace space with underscore so will map to enum accurately
         self.lead_days_elapsed = int(reservation_row["lead_time"])
@@ -31,7 +31,8 @@ class Reservation:
         self.deposit_type = Deposit_Type[reservation_row["deposit_type"].replace(" ", "_").upper()]
         
         self.agent_id = int(reservation_row["agent"]) if reservation_row["agent"] != "nan" else 0 #how to do this in a way they are familiar with
-        self.booking_company_id = int(reservation_row["company"])
+        #waiting for Malka if this should be put back in
+        #self.booking_company_id = int(reservation_row["company"])
         self.total_days_in_waiting_list = int(reservation_row["days_in_waiting_list"])
         self.booking_type = Booking_Type[reservation_row["customer_type"].replace("-", "_").upper()]
         self.average_daily_rate = float(reservation_row["adr"])

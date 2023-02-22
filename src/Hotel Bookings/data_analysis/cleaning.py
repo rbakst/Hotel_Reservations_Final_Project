@@ -26,14 +26,14 @@ def drop_cols_missing_data(df, percentage_missing_data):
     for col in df.columns:
         if np.sum(df[col].isnull())>(df.shape[0]*(percentage_missing_data/100)):
             utils.setup_logging() #find a better place to put this - see if it's needed in every file that uses loggings or only once per running of the application
-            utils.logging.info("dropping column: ") + col
+            utils.logging.info("dropping column: " + col) 
             df.drop(columns=col, inplace=True)
 def remove_rows_with_missing_value_from_col(df,column):
     df.dropna(subset=[column],inplace=True)
 def fill_missing_values_with_rounded_mean(df,column):
     df[column].fillna(value = df[column].mean(), inplace=True)
     df[column]=df[column].apply(np.floor)
-def filling_missing_values_with_value_from_prev_row(df,col_list):
+def fill_missing_values_with_value_from_prev_row(df,col_list):
     for col in col_list:
         df[col].fillna(method='bfill',inplace = True)
 def pivot_sum(df, col_index, col_cols, col_values):

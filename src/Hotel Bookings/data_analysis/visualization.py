@@ -1,6 +1,6 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
-from cleaning import filter_top_10, pivot_sum
+from data_analysis.cleaning import filter_top_10, pivot_sum #update this so it's clear that it's calling the cleaning class when used
 # The following function will create a catplot of the count for a number of columns
 def create_catplot(df, cols):
     i=0

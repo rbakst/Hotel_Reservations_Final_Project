@@ -1,1 +1,21 @@
 10:35:15,970 matplotlib.font_manager INFO generated new fontManager
+10:43:40,662 root INFO dropping column: 
+10:44:50,838 root INFO dropping column: company
+10:45:28,223 root INFO dropping column: company
+10:56:01,766 root INFO dropping column: company
+11:04:07,505 root INFO dropping column: company
+11:22:04,695 root INFO dropping column: company
+11:26:34,985 root INFO dropping column: company
+11:27:26,164 root INFO dropping column: company
+11:29:32,728 root INFO dropping column: company
+11:34:06,889 root INFO dropping column: company
+11:36:36,337 root INFO dropping column: company
+11:47:58,298 root INFO dropping column: company
+11:57:48,515 root INFO dropping column: company
+12:01:34,550 root INFO dropping column: company
+12:02:53,274 root INFO dropping column: company
+22:19:39,141 root INFO dropping column: company
+22:20:29,91 root INFO dropping column: company
+22:23:57,422 root INFO dropping column: company
+22:25:48,581 root INFO dropping column: company
+22:27:35,22 root INFO dropping column: company

@@ -1,0 +1,6 @@
+server = 'LAPTOP-E6NRDUVU'
+database = 'HotelBookings'
+username = 'mickey_mouse'
+password = 'disney123'
+driver= 'ODBC+Driver+17+for+SQL+Server'
+port = '1433'
