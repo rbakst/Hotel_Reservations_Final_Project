@@ -4,6 +4,7 @@ import pandas as pd
 import sql.create_database as db
 import data_analysis.cleaning as cleaning
 import data_analysis.visualization as visualization
+from map_reduce import map_reduce
 import os
 
 def main():
@@ -33,6 +34,8 @@ def main():
     reservations_list = [Reservation(row) for row in df_reservations_filtered.iterrows()]
     #any ideas of what we can do now with a reservation object?
 
+
+# I think we could tell them to use mapreduce for at least 2 (eg) of these cleanings
 def clean_reservations_dataframe(df_reservations):
     # The following function will return information for analysis for a specific dataframe.
     cleaning.analyze_df(df_reservations)
@@ -46,8 +49,17 @@ def clean_reservations_dataframe(df_reservations):
     cleaning.remove_rows_with_missing_value_from_col (df_reservations, 'agent')
     #fills the nans with the mean of the column and then rounds it.
     cleaning.fill_missing_values_with_rounded_mean(df_reservations, 'children')
-    #fills the nans with the value from the prev row.
+    
+    #fills the nans with the value from the prev row. mapreduce example
+
+    def merge_dfs(df1, df2):
+        df1.join(df2)
+        return df1
+    
+    map_reduce(df_reservations, 4, cleaning.fill_missing_values_with_value_from_prev_row, merge_dfs, ['agent', 'country'])
+
     cleaning.fill_missing_values_with_value_from_prev_row(df_reservations,['agent','country'])
+
     #this func will convert a col to a set and take in a list it will then lookup what exists in the set.
     cleaning.set_lookup(df_reservations , 'lead_time', [1,567,678,45])
 
