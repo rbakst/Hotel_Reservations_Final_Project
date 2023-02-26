@@ -50,14 +50,7 @@ def clean_reservations_dataframe(df_reservations):
     #fills the nans with the mean of the column and then rounds it.
     cleaning.fill_missing_values_with_rounded_mean(df_reservations, 'children')
     
-    #fills the nans with the value from the prev row. mapreduce example
-
-    def merge_dfs(df1, df2):
-        df1.join(df2)
-        return df1
-    
-    map_reduce(df_reservations, 4, cleaning.fill_missing_values_with_value_from_prev_row, merge_dfs, ['agent', 'country'])
-
+    #fills the nans with the value from the prev row
     cleaning.fill_missing_values_with_value_from_prev_row(df_reservations,['agent','country'])
 
     #this func will convert a col to a set and take in a list it will then lookup what exists in the set.
@@ -83,6 +76,27 @@ def visualize_reservations_dataframe(df_reservations):
     # The following function will create a boxplot for a sepecific column.
     visualization.create_boxplot(df_reservations, cols=['total_nights', 'lead_time'])
     #list comprehension - but may be too complex with the Guest object created inside
+
+# Analyse lead time - not tested
+def count_lead_time_matches(df):
+    days = [7, 68, 37, 72, 60, 48, 40, 15, 36, 93]
+    days_count = {}
+
+    lead_times = df['lead_time'].to_list()
+    
+    for lead_time in lead_times:
+        if lead_time in days:
+            days_count[lead_time] += days_count[lead_time]
+
+    return days_count
+
+def merge_data(dict1, dict2):
+    for k in dict2.keys():
+        dict1[k] = dict2[k]
+    return dict1
+
+def analyze_lead_time(df_reservations):
+    map_reduce(df_reservations, 4, count_lead_time_matches, merge_data)
     
 if __name__ == "__main__":
     main()
